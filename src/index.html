@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TagMaker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="../vendor/angular/angular.min.js"></script>
+        
+        <script src="app/app.js"></script>
+        <script src="app/tags/tags.js"></script>
+        <script src="app/tags/tagsCtrl.js"></script>
+        
+        <script src="common/common.js"></script>
+        <script src="common/components/components.js"></script>
+        <script src="common/components/readFile/readFile.js"></script>
+        <script src="common/components/readFile/readFileDirective.js"></script>
+        <script src="common/components/saveFile/saveFile.js"></script>
+        <script src="common/components/saveFile/saveFileDirective.js"></script>
+        <script src="common/components/copyBtn/copyBtn.js"></script>
+        <script src="common/components/copyBtn/copyBtnDirective.js"></script>
+        
+        <script src="common/features/features.js"></script>
+        <script src="common/features/tagStorage/tagStorage.js"></script>
+        <script src="common/features/tagStorage/tagStorageService.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="common/components/readFile/readFile.css">
+    </head>
+    <body ng-cloak ng-app="tagMaker" ng-controller="tagsCtrl">
+        <label class="outer-label">New tag:</label>
+        <div class="row">
+            <div class="input-ctrl">
+                <tm-file-output is-disabled="!modified"></tm-file-output>
+                <tm-file-input></tm-file-input>
+                <button class="btn btn-success" ng-click="removeTag()" ng-disabled="!canRemove()">Remove</button>
+                <button class="btn btn-success" ng-click="addNewTag()" ng-disabled="!validate()">Add</button>
+            </div>
+            <form name="new_tag_form">
+                <input type="text" name="input_field" class="form-control input-field" ng-model="newTag" ng-pattern="pattern" ng-required="true">
+            </form>            
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Available</label>
+                <div id="available-block" class="btn-storage">
+                    <button class="btn btn-primary" ng-repeat="tag in storage.available" ng-click="toSelected(tag)">{{tag}}</button>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <label>Selected</label>
+                <div id="selected-block" class="btn-storage">
+                    <button class="btn btn-primary" ng-repeat="tag in storage.selected" ng-click="toAvailable(tag)">{{tag}}</button>
+                </div>
+            </div>
+        </div>
+        
+        <label class="outer-label">Output</label>
+        <div class="row">
+            <div class="output-ctrl">
+                <button class="btn btn-danger" ng-disabled="!hasSelectedTags()" ng-click="storage.clear()">Clear</button>
+                <tm-copy-btn is-disabled="!hasSelectedTags()"></tm-copy-btn>
+            </div>
+            <textarea rows="5" readonly>{{makeHashTags()}}</textarea>
+        </div>
+    </body>
+</html>
