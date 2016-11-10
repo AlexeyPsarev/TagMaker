@@ -30,6 +30,7 @@ angular.module("tagMaker.app.tags")
             $scope.storage.addTags([$scope.newTag]);
             $scope.newTag = "";
             $scope.modified = true;
+            $scope.new_tag_form.$setPristine();
         };
         
         $scope.removeTag = function(){
@@ -39,7 +40,7 @@ angular.module("tagMaker.app.tags")
                 $scope.modified = true;
             }
             $scope.newTag = "";
-            
+            $scope.new_tag_form.$setPristine();
         };
         
         $scope.hasSelectedTags = function(){

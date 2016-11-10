@@ -51,6 +51,10 @@ textarea {
     padding: 6px;
 }
 
+.input-field.ng-dirty.ng-invalid{
+    background-color: #fa787e;
+}
+
 @media all and (orientation: portrait){
     .input-field {
         width: calc(100% - 230px);
