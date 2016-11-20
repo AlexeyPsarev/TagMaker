@@ -70,6 +70,12 @@ textarea {
     max-height: 200px;
 }
 
+@media all and (min-device-height: 460px){
+    .btn-storage {
+        max-height: calc(100vh - 260px);
+    }
+}
+
 .btn-storage button {
     margin: 0px 10px 10px 0px;
 }
