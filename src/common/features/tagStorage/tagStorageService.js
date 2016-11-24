@@ -9,12 +9,14 @@ angular.module("tagMaker.common.features.tagStorage")
             },
             addTags: function(arr){
                 var added = false;
-                for (var i = 0; i < arr.length; ++i){
-                    var elem = arr[i];
-                    var index = this.available.indexOf(elem);
-                    if (index == -1){
-                        this.available.push(elem);
-                        added = true;
+                for (var elem of arr){
+                    elem = elem.trim();
+                    if (elem != ""){
+                        var index = this.available.indexOf(elem);
+                        if (index == -1){
+                            this.available.push(elem);
+                            added = true;
+                        }
                     }
                 }
                 if (added)
